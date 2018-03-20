@@ -3,7 +3,6 @@ package com.example.movieRecoSys.domain;
 import org.neo4j.ogm.annotation.*;
 
 
-
 public class Edge {
 
     @Id

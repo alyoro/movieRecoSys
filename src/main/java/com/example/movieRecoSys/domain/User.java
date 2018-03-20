@@ -13,9 +13,6 @@ public class User extends Node {
     @Relationship(type = "WATCHED", direction = Relationship.OUTGOING)
     private List<Movie> watched;
 
-    @Relationship(type = "EVALUATED", direction = Relationship.OUTGOING)
-    private List<Movie> evaluated;
-
     public String getUsername() {
         return username;
     }
@@ -32,11 +29,4 @@ public class User extends Node {
         this.watched = watched;
     }
 
-    public List<Movie> getEvaluated() {
-        return evaluated;
-    }
-
-    public void setEvaluated(List<Movie> evaluated) {
-        this.evaluated = evaluated;
-    }
 }

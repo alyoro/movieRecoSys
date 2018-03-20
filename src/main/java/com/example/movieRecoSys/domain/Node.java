@@ -5,7 +5,8 @@ import org.neo4j.ogm.annotation.*;
 @NodeEntity
 public class Node {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     @Relationship(type = "")

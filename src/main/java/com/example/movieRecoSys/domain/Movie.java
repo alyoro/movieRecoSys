@@ -10,7 +10,7 @@ public class Movie extends Node {
     @Property(name = "title")
     private String title;
 
-    @Property(name = "directior")
+    @Property(name = "director")
     private String director;
 
     @Property(name = "year")
@@ -22,8 +22,6 @@ public class Movie extends Node {
     @Relationship(type = "WATCHED", direction = Relationship.INCOMING)
     private List<User> watched;
 
-    @Relationship(type = "EVALUATED", direction = Relationship.INCOMING)
-    private  List<User> evaluated;
 
     public String getTitle() {
         return title;
@@ -65,11 +63,4 @@ public class Movie extends Node {
         this.watched = watched;
     }
 
-    public List<User> getEvaluated() {
-        return evaluated;
-    }
-
-    public void setEvaluated(List<User> evaluated) {
-        this.evaluated = evaluated;
-    }
 }
