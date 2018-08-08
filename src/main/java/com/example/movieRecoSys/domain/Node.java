@@ -12,6 +12,7 @@ public class Node {
     @Relationship(type = "")
     private Edge edge;
 
+
     public Long getId() {
         return id;
     }
