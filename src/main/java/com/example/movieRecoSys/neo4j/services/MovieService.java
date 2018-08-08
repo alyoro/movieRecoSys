@@ -1,4 +1,4 @@
-package com.example.movieRecoSys.services;
+package com.example.movieRecoSys.neo4j.services;
 
         import org.springframework.stereotype.Service;
 

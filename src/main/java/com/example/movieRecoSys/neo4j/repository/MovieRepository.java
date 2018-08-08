@@ -1,7 +1,7 @@
-package com.example.movieRecoSys.repository;
+package com.example.movieRecoSys.neo4j.repository;
 
-import com.example.movieRecoSys.domain.Movie;
-import com.example.movieRecoSys.domain.MovieUI;
+import com.example.movieRecoSys.neo4j.domain.Movie;
+import com.example.movieRecoSys.neo4j.domain.MovieUI;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

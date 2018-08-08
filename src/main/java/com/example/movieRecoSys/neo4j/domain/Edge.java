@@ -1,4 +1,4 @@
-package com.example.movieRecoSys.domain;
+package com.example.movieRecoSys.neo4j.domain;
 
 import org.neo4j.ogm.annotation.*;
 

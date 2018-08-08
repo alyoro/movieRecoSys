@@ -1,7 +1,7 @@
-package com.example.movieRecoSys.domain;
+package com.example.movieRecoSys.neo4j.domain;
 
-import org.neo4j.ogm.annotation.Property;
-import org.neo4j.ogm.annotation.RelationshipEntity;
+        import org.neo4j.ogm.annotation.Property;
+        import org.neo4j.ogm.annotation.RelationshipEntity;
 
 @RelationshipEntity(type = "WATCHED")
 public class Watched extends Edge {

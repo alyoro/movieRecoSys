@@ -1,4 +1,4 @@
-package com.example.movieRecoSys;
+package com.example.movieRecoSys.neo4j;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

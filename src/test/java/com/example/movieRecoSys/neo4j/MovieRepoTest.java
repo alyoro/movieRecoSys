@@ -1,6 +1,7 @@
-package com.example.movieRecoSys;
+package com.example.movieRecoSys.neo4j;
 
-import com.example.movieRecoSys.repository.MovieRepository;
+import com.example.movieRecoSys.neo4j.repository.MovieRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,10 @@ public class MovieRepoTest {
     MovieRepository movieRepository;
 
     @Test
-    public void getMoviesDataById() {
-        Long id = 2L;
-        System.out.println("TEST+______________:" + movieRepository.getMoviesDataById(id).getAvgScore());
-    }
-
-    @Test
-    public void getMovieDataByTitleTest() {
+    public void checkConnectionToNeo4jAndSampleData() {
         String title = "The Shawshank Redemption";
-        System.out.println("TEST+______________:" + movieRepository.getMoviesDataByTitle(title).getAvgScore());
+        String year = "1995";
+        Assert.assertEquals(year,movieRepository.getMoviesDataByTitle(title).getMovie().getYear());
     }
 }
 
