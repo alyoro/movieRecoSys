@@ -3,6 +3,7 @@ package com.example.movieRecoSys.credential.controller;
 
 import com.example.movieRecoSys.credential.domain.ApplicationUser;
 import com.example.movieRecoSys.credential.repository.ApplicationUserRepository;
+import com.example.movieRecoSys.exception.UserAlreadyInDataBaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +23,12 @@ public class ApplicationUserController {
 
 
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody ApplicationUser user){
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        applicationUserRepository.save(user);
+    public void signUp(@RequestBody ApplicationUser user) throws UserAlreadyInDataBaseException{
+        if(null == applicationUserRepository.findByUsername(user.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            applicationUserRepository.save(user);
+        }
+        else throw new UserAlreadyInDataBaseException();
     }
 
 }
