@@ -1,12 +1,10 @@
 package com.example.movieRecoSys.config;
 
-
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
-
-@SpringBootApplication
+@Component
 public class BCryptBeanProvider {
 
     @Bean

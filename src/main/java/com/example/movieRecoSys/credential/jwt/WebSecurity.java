@@ -21,33 +21,27 @@ import static com.example.movieRecoSys.credential.jwt.SecurityConstants.SIGN_UP_
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
+    @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-//    @Autowired
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
-    public WebSecurity(UserDetailsServiceImpl userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.cors().and().csrf().disable().authorizeRequests()
-//                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
-//                .and()
-//                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-//                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
+                .and()
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 
-                //offline spring security to on comment this and uncomment upper
-                .anyRequest().permitAll();
+                //offline spring security -- to switch on: comment this and uncomment upper
+//                .anyRequest().permitAll();
     }
 
     @Override

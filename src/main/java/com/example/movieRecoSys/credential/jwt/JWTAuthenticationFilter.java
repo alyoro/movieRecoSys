@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.movieRecoSys.credential.domain.ApplicationUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,9 +25,9 @@ import static com.example.movieRecoSys.credential.jwt.SecurityConstants.SECRET;
 import static com.example.movieRecoSys.credential.jwt.SecurityConstants.HEADER_STRING;
 import static com.example.movieRecoSys.credential.jwt.SecurityConstants.TOKEN_PREFIX;
 
+
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -51,7 +50,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             throw new RuntimeException(e);
         }
     }
-
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request,

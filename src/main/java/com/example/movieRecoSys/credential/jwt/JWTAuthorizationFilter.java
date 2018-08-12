@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ import java.util.logging.FileHandler;
 import static com.example.movieRecoSys.credential.jwt.SecurityConstants.HEADER_STRING;
 import static com.example.movieRecoSys.credential.jwt.SecurityConstants.SECRET;
 import static com.example.movieRecoSys.credential.jwt.SecurityConstants.TOKEN_PREFIX;
+
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter{
 

@@ -1,6 +1,5 @@
 package com.example.movieRecoSys.credential.controller;
 
-
 import com.example.movieRecoSys.credential.domain.ApplicationUser;
 import com.example.movieRecoSys.credential.repository.ApplicationUserRepository;
 import com.example.movieRecoSys.exception.UserAlreadyInDataBaseException;
@@ -20,7 +19,6 @@ public class ApplicationUserController {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
 
     @PostMapping("/sign-up")
     public void signUp(@RequestBody ApplicationUser user) throws UserAlreadyInDataBaseException{

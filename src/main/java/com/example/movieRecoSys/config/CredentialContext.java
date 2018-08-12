@@ -15,10 +15,10 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @ComponentScan("com.example.movieRecoSys.credential")
 public class CredentialContext {
+
     @Autowired
     private Environment env;
 
-    @Primary
     @Bean
     public DataSource customDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
