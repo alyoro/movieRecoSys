@@ -18,8 +18,8 @@ public class CredentialTest {
 
     @Test
     public void checkConnectionAndFindUserInPostgresqlTest() {
-        Long id = 1L;
-        Assert.assertEquals("test",applicationUserRepository.findByUsername("test").getPassword());
+        Long id = 3L;
+        Assert.assertEquals(3L,applicationUserRepository.findByUsername("test2").getId());
     }
 
 

@@ -16,4 +16,7 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
     @Query("match(:User)-[n:WATCHED]->(m:Movie) where m.title={0} return m as movie, avg(n.score) as avgScore")
     MovieUI getMoviesDataByTitle(String title);
 
+    @Query("match(:User)-[n:WATCHED]->(m:Movie) return m as movie, avg(n.score) as avgScore order by avgScore desc")
+    List<MovieUI> getTopMovies();
+
 }
