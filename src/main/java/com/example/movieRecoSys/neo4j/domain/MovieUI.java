@@ -1,25 +1,11 @@
 package com.example.movieRecoSys.neo4j.domain;
 
+import lombok.Data;
 import org.springframework.data.neo4j.annotation.QueryResult;
 
 @QueryResult
+@Data
 public class MovieUI {
     Movie movie;
     Double avgScore;
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Double getAvgScore() {
-        return avgScore;
-    }
-
-    public void setAvgScore(Double avgScore) {
-        this.avgScore = avgScore;
-    }
 }

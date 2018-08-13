@@ -4,7 +4,6 @@ import com.example.movieRecoSys.neo4j.domain.Movie;
 import com.example.movieRecoSys.neo4j.domain.MovieUI;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-
 import java.util.List;
 
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Long> {

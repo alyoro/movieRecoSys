@@ -1,8 +1,10 @@
 package com.example.movieRecoSys.neo4j.domain;
 
+import lombok.Data;
 import org.neo4j.ogm.annotation.*;
 
 @NodeEntity
+@Data
 public class Node {
 
     @Id
@@ -11,21 +13,4 @@ public class Node {
 
     @Relationship(type = "")
     private Edge edge;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Edge getEdge() {
-        return edge;
-    }
-
-    public void setEdge(Edge edge) {
-        this.edge = edge;
-    }
 }
