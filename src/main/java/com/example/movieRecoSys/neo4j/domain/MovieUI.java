@@ -1,11 +1,13 @@
 package com.example.movieRecoSys.neo4j.domain;
 
 import lombok.Data;
-import org.springframework.data.neo4j.annotation.QueryResult;
 
-@QueryResult
 @Data
 public class MovieUI {
-    Movie movie;
+    Long id;
+    String title;
+    String director;
+    String year;
+    String type;
     Double avgScore;
 }

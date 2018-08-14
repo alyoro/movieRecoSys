@@ -1,6 +1,6 @@
 package com.example.movieRecoSys.neo4j;
 
-import com.example.movieRecoSys.neo4j.domain.MovieUI;
+import com.example.movieRecoSys.neo4j.domain.MovieDB;
 import com.example.movieRecoSys.neo4j.repository.MovieRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,9 +29,9 @@ public class MovieRepoTest {
     @Test
     public void topMoviesTest(){
 
-        List<MovieUI> topMovies = movieRepository.getTopMovies();
+        List<MovieDB> topMovies = movieRepository.getTopMovies();
         System.out.println("TEST TOP ORDERED");
-        for(MovieUI movie : topMovies){
+        for(MovieDB movie : topMovies){
             System.out.println("title: "+movie.getMovie().getTitle()+", avgScore: "+movie.getAvgScore());
         }
     }
