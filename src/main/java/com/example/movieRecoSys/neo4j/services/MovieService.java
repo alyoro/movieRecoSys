@@ -9,4 +9,8 @@ package com.example.movieRecoSys.neo4j.services;
 public interface MovieService {
 
         List<MovieUI> getTopMovies();
+
+        List<MovieUI> getMovieByTitle(String title);
+
+        MovieUI getMovieById(long id);
 }

@@ -16,23 +16,43 @@ public class MovieServiceImpl implements MovieService{
     @Autowired
     MovieRepository movieRepository;
 
+    @Override
     public List<MovieUI> getTopMovies(){
+        return convertMoviesDBToUIList(movieRepository.getTopMovies());
+    }
 
-        var movies = movieRepository.getTopMovies();
+    @Override
+    public List<MovieUI> getMovieByTitle(String title) {
+       return convertMoviesDBToUIList(movieRepository.getMoviesByTitle(title));
+    }
+
+    @Override
+    public MovieUI getMovieById(long id) {
+        movieRepository.getMoviesById(id);
+        return convertMoviesDBToUI(movieRepository.getMoviesById(id));
+    }
+
+//    --------------------------------------------------    //
+    private MovieUI convertMoviesDBToUI(MovieDB movie){
+        var movieTmp = new MovieUI();
+
+        movieTmp.setId(movie.getMovie().getId());
+        movieTmp.setTitle(movie.getMovie().getTitle());
+        movieTmp.setDirector(movie.getMovie().getDirector());
+        movieTmp.setYear(movie.getMovie().getYear());
+        movieTmp.setType(movie.getMovie().getType());
+        movieTmp.setAvgScore(movie.getAvgScore());
+
+        return movieTmp;
+    }
+
+    private List<MovieUI> convertMoviesDBToUIList(List<MovieDB> movies){
         var moviesUI = new ArrayList<MovieUI>();
-        MovieUI movieTmp = null;
 
         for(MovieDB movie : movies){
-            movieTmp = new MovieUI();
-            movieTmp.setId(movie.getMovie().getId());
-            movieTmp.setTitle(movie.getMovie().getTitle());
-            movieTmp.setDirector(movie.getMovie().getDirector());
-            movieTmp.setYear(movie.getMovie().getYear());
-            movieTmp.setType(movie.getMovie().getType());
-            movieTmp.setAvgScore(movie.getAvgScore());
-
-            moviesUI.add(movieTmp);
+            moviesUI.add(convertMoviesDBToUI(movie));
         }
-        return  moviesUI;
+
+        return moviesUI;
     }
 }

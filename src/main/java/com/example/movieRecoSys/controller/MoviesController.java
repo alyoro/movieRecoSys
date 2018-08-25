@@ -1,6 +1,6 @@
 package com.example.movieRecoSys.controller;
 
-
+import com.example.movieRecoSys.credential.service.SecurityContextUsername;
 import com.example.movieRecoSys.neo4j.domain.MovieUI;
 import com.example.movieRecoSys.neo4j.services.MovieService;
 import lombok.extern.log4j.Log4j2;
@@ -17,12 +17,20 @@ public class MoviesController {
     @Autowired
     MovieService movieService;
 
+    @Autowired
+    SecurityContextUsername securityContextUsername;
+
     @RequestMapping(path = "/top")
     public List<MovieUI> getTopMovies(){
         log.info("Getting top Movies");
         return movieService.getTopMovies();
     }
 
+    @RequestMapping(path = "/search")
+    public List<MovieUI> searchMovieByTitle(String title){
+        log.info("Searching for movie by Title: "+title);
+        return movieService.getMovieByTitle(title);
+    }
 
-    
+
 }

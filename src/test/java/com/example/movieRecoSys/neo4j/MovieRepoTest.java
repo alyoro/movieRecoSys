@@ -18,12 +18,7 @@ public class MovieRepoTest {
     @Autowired
     MovieRepository movieRepository;
 
-    @Test
-    public void checkConnectionToNeo4jAndSampleData() {
-        String title = "The Shawshank Redemption";
-        String year = "1995";
-        Assert.assertEquals(year,movieRepository.getMoviesDataByTitle(title).getMovie().getYear());
-    }
+
 
 
     @Test
