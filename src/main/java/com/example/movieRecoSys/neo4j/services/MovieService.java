@@ -14,5 +14,5 @@ public interface MovieService {
 
         MovieUI getMovieById(long id);
 
-        void evaluateMovie(long id, int score);
+        int evaluateMovie(long id, int score);
 }

@@ -1,11 +1,10 @@
 package com.example.movieRecoSys.neo4j.services;
 
 import com.example.movieRecoSys.credential.service.SecurityContextUsername;
-import com.example.movieRecoSys.credential.service.UserDetailsServiceImpl;
-import com.example.movieRecoSys.neo4j.domain.MovieDB;
-import com.example.movieRecoSys.neo4j.domain.MovieUI;
+import com.example.movieRecoSys.neo4j.domain.*;
 import com.example.movieRecoSys.neo4j.repository.MovieRepository;
 import com.example.movieRecoSys.neo4j.repository.UserRepository;
+import com.example.movieRecoSys.neo4j.repository.WatchedRepository;
 import lombok.extern.log4j.Log4j2;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,9 @@ public class MovieServiceImpl implements MovieService{
 
     @Autowired
     MovieRepository movieRepository;
+
+    @Autowired
+    WatchedRepository watchedRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -47,11 +49,23 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public void evaluateMovie(long id, int score){
-        log.info("evaluateMovie id: "+id+", score: "+score);
+    public int evaluateMovie(long movieId, int score) {
         long userId = userRepository.findByUsername(securityContextUsername.getUsernameFromSecurityContext()).getId();
-        movieRepository.evaluateMovie(id,score,userId);
+
+        User user = userRepository.findByUsername(securityContextUsername.getUsernameFromSecurityContext());
+        Movie movie = movieRepository.getMoviesById(movieId).getMovie();
+        log.info(watchedRepository.findByStartNodeAndEndNode(user,movie));
+        if(watchedRepository.findByStartNodeAndEndNode(user,movie)==null) {
+            log.info("evaluateMovie movieId: " + movieId + ", score: " + score);
+            watchedRepository.save(new Watched(user, movie, score));
+        }
+        else {
+            log.info("changeEvaluation movieId: "+ movieId + ", score: "+score);
+            movieRepository.changeEvaluation(userId, movieId, score);
+        }
+        return 1;
     }
+
 
 //    --------------------------------------------------    //
     private MovieUI convertMoviesDBToUI(MovieDB movie){

@@ -31,6 +31,7 @@ public class ApplicationUserController {
     public ResponseEntity signUp(@RequestBody ApplicationUser user) throws UserAlreadyInDataBaseException{
         if(null == applicationUserRepository.findByUsername(user.getUsername()) && null == userRepository.findByUsername(user.getUsername())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setAdmin(false);
             userRepository.save(new User(user.getUsername()));
             applicationUserRepository.save(user);
             return ResponseEntity.ok(null);

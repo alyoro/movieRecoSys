@@ -10,4 +10,12 @@ public class Watched extends Edge {
 
     @Property(name = "score")
     private int score;
+
+    Watched(){}
+
+    public Watched(Node startNode, Node endNode, int score){
+        this.setStartNode(startNode);
+        this.setEndNode(endNode);
+        this.score = score;
+    }
 }

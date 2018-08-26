@@ -4,9 +4,11 @@ import lombok.Data;
 import org.neo4j.ogm.annotation.*;
 
 @Data
+@RelationshipEntity(type = "EDGE")
 public class Edge {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @StartNode
@@ -14,5 +16,6 @@ public class Edge {
 
     @EndNode
     private Node endNode;
+
 
 }

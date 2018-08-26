@@ -15,6 +15,8 @@ public class ApplicationUser {
     private String username;
     @Column
     private String password;
+    @Column
+    private boolean admin;
 
     public ApplicationUser() {
     }
@@ -47,5 +49,13 @@ public class ApplicationUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }
