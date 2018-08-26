@@ -5,7 +5,9 @@ import com.example.movieRecoSys.neo4j.domain.MovieUI;
 import com.example.movieRecoSys.neo4j.services.MovieService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
@@ -26,10 +28,15 @@ public class MoviesController {
         return movieService.getTopMovies();
     }
 
-    @RequestMapping(path = "/search")
+    @RequestMapping(path = "/search/title")
     public List<MovieUI> searchMovieByTitle(String title){
         log.info("Searching for movie by Title: "+title);
         return movieService.getMovieByTitle(title);
+    }
+
+    @RequestMapping(path = "/evaluate")
+    public void evaluateMovie(@RequestBody EvaluateMovieRequestBody evaluateMovieRequestBody){
+        movieService.evaluateMovie(evaluateMovieRequestBody.getId(), evaluateMovieRequestBody.getScore());
     }
 
 

@@ -3,7 +3,11 @@ package com.example.movieRecoSys.credential.controller;
 import com.example.movieRecoSys.credential.domain.ApplicationUser;
 import com.example.movieRecoSys.credential.repository.ApplicationUserRepository;
 import com.example.movieRecoSys.exception.UserAlreadyInDataBaseException;
+import com.example.movieRecoSys.neo4j.domain.User;
+import com.example.movieRecoSys.neo4j.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +22,23 @@ public class ApplicationUserController {
     private ApplicationUserRepository applicationUserRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody ApplicationUser user) throws UserAlreadyInDataBaseException{
-        if(null == applicationUserRepository.findByUsername(user.getPassword())) {
+    public ResponseEntity signUp(@RequestBody ApplicationUser user) throws UserAlreadyInDataBaseException{
+        if(null == applicationUserRepository.findByUsername(user.getUsername()) && null == userRepository.findByUsername(user.getUsername())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            userRepository.save(new User(user.getUsername()));
             applicationUserRepository.save(user);
+            return ResponseEntity.ok(null);
         }
-        else throw new UserAlreadyInDataBaseException();
+        else {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+        }
     }
-
 }
+
+

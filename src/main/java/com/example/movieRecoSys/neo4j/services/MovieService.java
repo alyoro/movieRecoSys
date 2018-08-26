@@ -13,4 +13,6 @@ public interface MovieService {
         List<MovieUI> getMovieByTitle(String title);
 
         MovieUI getMovieById(long id);
+
+        void evaluateMovie(long id, int score);
 }
