@@ -57,7 +57,7 @@ public class MovieServiceImpl implements MovieService{
         log.info(watchedRepository.findByStartNodeAndEndNode(user,movie));
         if(watchedRepository.findByStartNodeAndEndNode(user,movie)==null) {
             log.info("evaluateMovie movieId: " + movieId + ", score: " + score);
-            watchedRepository.save(new Watched(user, movie, score));
+            movieRepository.evaluateMovie(userId, movieId, score);
         }
         else {
             log.info("changeEvaluation movieId: "+ movieId + ", score: "+score);
