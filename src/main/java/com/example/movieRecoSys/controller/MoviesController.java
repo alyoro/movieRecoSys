@@ -37,20 +37,4 @@ public class MoviesController {
         return movieService.getMovieByTitle(title);
     }
 
-    @RequestMapping(path = "/evaluate")
-    public ResponseEntity evaluateMovie(@RequestBody EvaluateMovieRequestBody evaluateMovieRequestBody){
-        if(movieService.evaluateMovie(evaluateMovieRequestBody.getId(), evaluateMovieRequestBody.getScore())==1){
-            return ResponseEntity.ok(null);
-        }else{
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
-        }
-    }
-
-    @RequestMapping(path = "/add")
-    public ResponseEntity addNewMovie(@RequestBody Movie movie){
-        movieService.addNewMovie(movie);
-        return ResponseEntity.ok(null);
-    }
-
-
 }
