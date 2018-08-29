@@ -66,6 +66,12 @@ public class MovieServiceImpl implements MovieService{
         return 1;
     }
 
+    @Override
+    public int addNewMovie(Movie movie){
+        movieRepository.save(movie);
+        return 1;
+    }
+
 
 //    --------------------------------------------------    //
     private MovieUI convertMoviesDBToUI(MovieDB movie){

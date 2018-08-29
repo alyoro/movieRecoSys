@@ -29,6 +29,4 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
 
     @Query("match (u:User)-[w:WATCHED]->(m:Movie) where ID(u)={0} and ID(m)={1} return w")
     Watched checkIfThereIsRelationshipInDBAlready(long userId, long movieId);
-
-
 }

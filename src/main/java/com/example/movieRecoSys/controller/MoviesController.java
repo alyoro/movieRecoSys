@@ -1,12 +1,14 @@
 package com.example.movieRecoSys.controller;
 
 import com.example.movieRecoSys.credential.service.SecurityContextUsername;
+import com.example.movieRecoSys.neo4j.domain.Movie;
 import com.example.movieRecoSys.neo4j.domain.MovieUI;
 import com.example.movieRecoSys.neo4j.services.MovieService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +44,12 @@ public class MoviesController {
         }else{
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
         }
+    }
+
+    @RequestMapping(path = "/add")
+    public ResponseEntity addNewMovie(@RequestBody Movie movie){
+        movieService.addNewMovie(movie);
+        return ResponseEntity.ok(null);
     }
 
 

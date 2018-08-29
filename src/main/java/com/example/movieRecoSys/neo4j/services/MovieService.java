@@ -1,5 +1,6 @@
 package com.example.movieRecoSys.neo4j.services;
 
+        import com.example.movieRecoSys.neo4j.domain.Movie;
         import com.example.movieRecoSys.neo4j.domain.MovieUI;
         import org.springframework.stereotype.Service;
 
@@ -15,4 +16,6 @@ public interface MovieService {
         MovieUI getMovieById(long id);
 
         int evaluateMovie(long id, int score);
+
+        int addNewMovie(Movie movie);
 }
