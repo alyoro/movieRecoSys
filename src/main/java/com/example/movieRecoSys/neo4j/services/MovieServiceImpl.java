@@ -9,12 +9,14 @@ import lombok.extern.log4j.Log4j2;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Log4j2
+@Transactional
 public class MovieServiceImpl implements MovieService{
 
     @Autowired
@@ -76,8 +78,16 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public int addNewMovie(Movie movie){
+        log.info("addNewMovie:"+movie);
         movieRepository.save(movie);
+        movieRepository.addRelationshipAdded(userRepository.findByUsername(securityContextUsername.getUsernameFromSecurityContext()).getId(),movieRepository.getMovieByTitle(movie.getTitle()).getId());
         return 1;
+    }
+
+    @Override
+    public List<MovieUI> getRandomMovies(){
+        log.info("getRandomMovies");
+        return convertMoviesDBToUIList(movieRepository.getRandomMovies());
     }
 
 

@@ -37,4 +37,10 @@ public class MoviesController {
         return movieService.getMovieByTitle(title);
     }
 
+    @RequestMapping(path = "/random")
+    public List<MovieUI> getRandomMovies(){
+        log.info("Getting random Movies");
+        return movieService.getRandomMovies();
+    }
+
 }

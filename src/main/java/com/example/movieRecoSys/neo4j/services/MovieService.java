@@ -13,6 +13,8 @@ public interface MovieService {
 
         List<MovieUI> getMovieByTitle(String title);
 
+        List<MovieUI> getRandomMovies();
+
         MovieUI getMovieById(long id);
 
         int evaluateMovie(long id, int score);
