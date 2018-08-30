@@ -10,4 +10,5 @@ public class MovieUI {
     String year;
     String type;
     Double avgScore;
+    Double yourScore;
 }

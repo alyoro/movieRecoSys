@@ -55,12 +55,12 @@ public class MovieServiceImpl implements MovieService{
     public MovieUI getMovieById(long id) {
         log.info("getMovieById: "+id);
         movieRepository.getMoviesById(id);
-        return convertMoviesDBToUI(movieRepository.getMoviesById(id));
+        return convertMovieDBToUI(movieRepository.getMoviesById(id));
     }
 
     @Override
     public int evaluateMovie(long movieId, int score) {
-        long userId = userRepository.findByUsername(securityContextUsername.getUsernameFromSecurityContext()).getId();
+        long userId = this.getUserID();
 
         User user = userRepository.findByUsername(securityContextUsername.getUsernameFromSecurityContext());
         Movie movie = movieRepository.getMovieById(movieId);
@@ -80,7 +80,7 @@ public class MovieServiceImpl implements MovieService{
     public int addNewMovie(Movie movie){
         log.info("addNewMovie:"+movie);
         movieRepository.save(movie);
-        movieRepository.addRelationshipAdded(userRepository.findByUsername(securityContextUsername.getUsernameFromSecurityContext()).getId(),movieRepository.getMovieByTitle(movie.getTitle()).getId());
+        movieRepository.addRelationshipAdded(this.getUserID(),movieRepository.getMovieByTitle(movie.getTitle()).getId());
         return 1;
     }
 
@@ -90,9 +90,31 @@ public class MovieServiceImpl implements MovieService{
         return convertMoviesDBToUIList(movieRepository.getRandomMovies());
     }
 
+    @Override
+    public  List<MovieUI> getWatchedMovies(){
+        return convertMoviesDBToUIList(movieRepository.getWatchedMovies(this.getUserID()));
+    }
+
+    @Override
+    public List<MovieUI> getRecommendations(String reco, String data){
+        if(reco.equals("director")){
+            log.info("getRecommendations: "+reco);
+            return convertMoviesDBToUIList(movieRepository.getRecommendationByDirector(this.getUserID(),data));
+        }
+        if(reco.equals("year")){
+            log.info("getRecommendations: "+reco);
+            return convertMoviesDBToUIList(movieRepository.getRecommendationByYear(this.getUserID(),data));
+        }
+        if(reco.equals("type")){
+            log.info("getRecommendations: "+reco);
+            return convertMoviesDBToUIList(movieRepository.getRecommendationByType(this.getUserID(),data));
+        }
+        else return null;
+    }
+
 
 //    --------------------------------------------------    //
-    private MovieUI convertMoviesDBToUI(MovieDB movie){
+    private MovieUI convertMovieDBToUI(MovieDB movie){
         var movieTmp = new MovieUI();
 
         movieTmp.setId(movie.getMovie().getId());
@@ -101,7 +123,11 @@ public class MovieServiceImpl implements MovieService{
         movieTmp.setYear(movie.getMovie().getYear());
         movieTmp.setType(movie.getMovie().getType());
         movieTmp.setAvgScore(movie.getAvgScore());
-
+        if(this.getUserID() == -1L) {
+            movieTmp.setYourScore(0.0);
+        }else {
+            movieTmp.setYourScore(movieRepository.getYourEvaulationOfMovie(this.getUserID(), movie.getMovie().getId()));
+        }
         return movieTmp;
     }
 
@@ -109,9 +135,16 @@ public class MovieServiceImpl implements MovieService{
         var moviesUI = new ArrayList<MovieUI>();
 
         for(MovieDB movie : movies){
-            moviesUI.add(convertMoviesDBToUI(movie));
+            moviesUI.add(convertMovieDBToUI(movie));
         }
 
         return moviesUI;
+    }
+
+    private long getUserID(){
+        if(securityContextUsername.getUsernameFromSecurityContext()=="anonymousUser"){
+            return -1L;
+        }else
+        return userRepository.findByUsername(securityContextUsername.getUsernameFromSecurityContext()).getId();
     }
 }

@@ -15,9 +15,15 @@ public interface MovieService {
 
         List<MovieUI> getRandomMovies();
 
+        List<MovieUI> getWatchedMovies();
+
+        List<MovieUI> getRecommendations(String reco, String data);
+
         MovieUI getMovieById(long id);
 
         int evaluateMovie(long id, int score);
 
         int addNewMovie(Movie movie);
+
+
 }
