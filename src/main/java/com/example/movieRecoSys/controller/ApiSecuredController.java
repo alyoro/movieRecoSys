@@ -1,5 +1,6 @@
 package com.example.movieRecoSys.controller;
 
+import com.example.movieRecoSys.aspect.LogExecutionTime;
 import com.example.movieRecoSys.neo4j.domain.Movie;
 import com.example.movieRecoSys.neo4j.domain.MovieUI;
 import com.example.movieRecoSys.neo4j.services.MovieService;
@@ -31,6 +32,7 @@ public class ApiSecuredController {
      * @param movie json contains (title, director, year, type)
      * @return status of action
      */
+    @LogExecutionTime
     @RequestMapping(path = "/movies/add")
     public ResponseEntity addNewMovie(@RequestBody Movie movie){
         movieService.addNewMovie(movie);
@@ -43,6 +45,7 @@ public class ApiSecuredController {
      * @param evaluateMovieRequestBody json to evaluate contains(id,score)
      * @return status of action
      */
+    @LogExecutionTime
     @RequestMapping(path = "/movies/evaluate")
     public ResponseEntity evaluateMovie(@RequestBody EvaluateMovieRequestBody evaluateMovieRequestBody){
         if(movieService.evaluateMovie(evaluateMovieRequestBody.getId(), evaluateMovieRequestBody.getScore())==1){
@@ -56,6 +59,7 @@ public class ApiSecuredController {
      * Returning watched movies by user used link
      * @return List of watched movies
      */
+    @LogExecutionTime
     @RequestMapping(path = "/movies/watched")
     public List<MovieUI> getWatchedMovies(){
         return movieService.getWatchedMovies();
@@ -67,6 +71,7 @@ public class ApiSecuredController {
      * @param data value of looking property
      * @return List of recommended movies
      */
+    @LogExecutionTime
     @RequestMapping(path = "/movies/reco")
     public List<MovieUI> getRecommendations(@RequestParam String reco, @RequestParam String data){
         return movieService.getRecommendations(reco, data);

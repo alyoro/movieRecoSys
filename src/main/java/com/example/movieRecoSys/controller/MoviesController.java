@@ -1,5 +1,6 @@
 package com.example.movieRecoSys.controller;
 
+import com.example.movieRecoSys.aspect.LogExecutionTime;
 import com.example.movieRecoSys.credential.service.SecurityContextUsername;
 import com.example.movieRecoSys.neo4j.domain.Movie;
 import com.example.movieRecoSys.neo4j.domain.MovieUI;
@@ -30,6 +31,7 @@ public class MoviesController {
      * Returns top movies
      * @return List of sorted movies by average score
      */
+    @LogExecutionTime
     @RequestMapping(path = "/top")
     public List<MovieUI> getTopMovies(){
         log.info("Getting top Movies");
@@ -41,6 +43,7 @@ public class MoviesController {
      * @param title part/full name of searching title
      * @return List of movies that contans title
      */
+    @LogExecutionTime
     @RequestMapping(path = "/search/title")
     public List<MovieUI> searchMovieByTitle(String title){
         log.info("Searching for movie by Title: "+title);
@@ -51,6 +54,7 @@ public class MoviesController {
      * Rturn random movies
      * @return List of random fetched movies
      */
+    @LogExecutionTime
     @RequestMapping(path = "/random")
     public List<MovieUI> getRandomMovies(){
         log.info("Getting random Movies");

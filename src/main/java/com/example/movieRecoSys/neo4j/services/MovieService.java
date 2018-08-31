@@ -1,6 +1,7 @@
 package com.example.movieRecoSys.neo4j.services;
 
         import com.example.movieRecoSys.neo4j.domain.Movie;
+        import com.example.movieRecoSys.neo4j.domain.MovieDB;
         import com.example.movieRecoSys.neo4j.domain.MovieUI;
         import org.springframework.stereotype.Service;
 
@@ -63,6 +64,4 @@ public interface MovieService {
      * @return success or not
      */
     int addNewMovie(Movie movie);
-
-
 }

@@ -92,7 +92,9 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public  List<MovieUI> getWatchedMovies(){
-        return convertMoviesDBToUIList(movieRepository.getWatchedMovies(this.getUserID()));
+        var movies = movieRepository.getWatchedMovies(this.getUserID());
+        log.info(movies);
+        return convertMoviesDBToUIList(movies);
     }
 
     @Override
