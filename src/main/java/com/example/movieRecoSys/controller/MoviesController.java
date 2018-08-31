@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+
+/**
+ * Unsecured controller for not logged and logged users
+ */
 @RestController
 @RequestMapping(path = "movies")
 @Log4j2
@@ -22,21 +26,31 @@ public class MoviesController {
     @Autowired
     MovieService movieService;
 
-    @Autowired
-    SecurityContextUsername securityContextUsername;
-
+    /**
+     * Returns top movies
+     * @return List of sorted movies by average score
+     */
     @RequestMapping(path = "/top")
     public List<MovieUI> getTopMovies(){
         log.info("Getting top Movies");
         return movieService.getTopMovies();
     }
 
+    /**
+     * Return movies by Title
+     * @param title part/full name of searching title
+     * @return List of movies that contans title
+     */
     @RequestMapping(path = "/search/title")
     public List<MovieUI> searchMovieByTitle(String title){
         log.info("Searching for movie by Title: "+title);
         return movieService.getMovieByTitle(title);
     }
 
+    /**
+     * Rturn random movies
+     * @return List of random fetched movies
+     */
     @RequestMapping(path = "/random")
     public List<MovieUI> getRandomMovies(){
         log.info("Getting random Movies");

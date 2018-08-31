@@ -8,6 +8,10 @@ import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.transaction.Neo4jTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
+/**
+ * Class building context and connection with neo4j database
+ */
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.example.movieRecoSys.neo4j")

@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
+/**
+ * Secured controller for logged users
+ */
 @RestController
 @RequestMapping(path = "api")
 @Log4j2
@@ -22,6 +26,11 @@ public class ApiSecuredController {
     @Autowired
     MovieService movieService;
 
+    /**
+     * Adding new movies to database
+     * @param movie json contains (title, director, year, type)
+     * @return status of action
+     */
     @RequestMapping(path = "/movies/add")
     public ResponseEntity addNewMovie(@RequestBody Movie movie){
         movieService.addNewMovie(movie);
@@ -29,6 +38,11 @@ public class ApiSecuredController {
     }
 
 
+    /**
+     * Evaluation of movie
+     * @param evaluateMovieRequestBody json to evaluate contains(id,score)
+     * @return status of action
+     */
     @RequestMapping(path = "/movies/evaluate")
     public ResponseEntity evaluateMovie(@RequestBody EvaluateMovieRequestBody evaluateMovieRequestBody){
         if(movieService.evaluateMovie(evaluateMovieRequestBody.getId(), evaluateMovieRequestBody.getScore())==1){
@@ -38,11 +52,21 @@ public class ApiSecuredController {
         }
     }
 
+    /**
+     * Returning watched movies by user used link
+     * @return List of watched movies
+     */
     @RequestMapping(path = "/movies/watched")
     public List<MovieUI> getWatchedMovies(){
         return movieService.getWatchedMovies();
     }
 
+    /**
+     *
+     * @param reco by which property gets recommendation
+     * @param data value of looking property
+     * @return List of recommended movies
+     */
     @RequestMapping(path = "/movies/reco")
     public List<MovieUI> getRecommendations(@RequestParam String reco, @RequestParam String data){
         return movieService.getRecommendations(reco, data);

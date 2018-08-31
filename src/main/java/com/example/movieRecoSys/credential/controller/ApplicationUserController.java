@@ -2,7 +2,6 @@ package com.example.movieRecoSys.credential.controller;
 
 import com.example.movieRecoSys.credential.domain.ApplicationUser;
 import com.example.movieRecoSys.credential.repository.ApplicationUserRepository;
-import com.example.movieRecoSys.exception.UserAlreadyInDataBaseException;
 import com.example.movieRecoSys.neo4j.domain.User;
 import com.example.movieRecoSys.neo4j.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,14 @@ public class ApplicationUserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+    /**
+     * Endpoint used to register new user
+     * @param user json contains username and password
+     * @return status of action
+     */
     @PostMapping("/sign-up")
-    public ResponseEntity signUp(@RequestBody ApplicationUser user) throws UserAlreadyInDataBaseException{
+    public ResponseEntity signUp(@RequestBody ApplicationUser user){
         if(null == applicationUserRepository.findByUsername(user.getUsername()) && null == userRepository.findByUsername(user.getUsername())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.setAdmin(false);

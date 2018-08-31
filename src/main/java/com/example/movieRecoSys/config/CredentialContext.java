@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
+/**
+ * Class building context and connection with PostgreSQL
+ */
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.example.movieRecoSys.credential")
